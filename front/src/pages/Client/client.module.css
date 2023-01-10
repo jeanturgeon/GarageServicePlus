@@ -1,0 +1,69 @@
+.container {
+    background-color: #7B9EA8;
+}
+.section-header {
+    margin-bottom: 2rem;
+    background-color: #10222E;    
+    display: flex;
+    justify-content:space-between
+}
+
+.btn-client-detail, .btn-deactivate {
+    background-color: #7B9EA8;
+    margin-top: 0.8rem;
+    border-radius: 4px;
+    color:white;    
+}
+
+.btn-deactivate {
+    background-color: #10222E;
+}
+
+.clientName {
+    text-align: center;    
+    color: white;    
+}
+
+.vehicule-list-item {
+    display: flex;    
+}
+
+.vehicule-list-item i {
+    color:#10222E
+}
+
+
+a{
+    text-decoration: none;    
+}
+
+.vehicule-item{
+    color: #10222E;
+}
+
+a p:hover {
+    text-decoration: underline;
+}
+
+.link i{        
+    color:white;        
+}
+
+.card-container {
+    box-shadow: 8px 8px 10px #10222E ;
+}
+
+.card-header {
+    background-color: #10222E;
+    color: white;
+    
+}
+
+.card-body {
+    line-height: 0.5rem;
+}
+
+
+.footer {
+    padding-bottom: 1rem;
+}

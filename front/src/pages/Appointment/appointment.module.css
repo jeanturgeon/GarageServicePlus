@@ -1,0 +1,69 @@
+/* 
+.cardHeader {
+    background-color: #7B9EA8;
+    color: white;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    padding: 0 10px;
+  } */
+
+  .shift-card {
+    display: inline-block;
+    vertical-align: top;
+    width: 30%; 
+    margin-right: 5px;
+    margin-bottom: 15px;  
+  }
+  
+  .shifts-title {
+    font-weight: 600;
+    font-size: 1.25rem;
+  }
+  
+  .apt-title {
+    font-weight: 700;
+  }
+   
+  .card-header {
+    background-color: #7B9EA8;
+    color: white;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    padding: 0 10px;
+  }
+  
+  .card-body {
+    margin: 0 5px;
+    line-height: 1.25rem;
+    
+  }
+  
+  .card-subtitles {
+    margin: 1rem 0 0.25rem 1rem;
+    font-weight: 600;
+  
+  }
+
+  .ulClients {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    list-style-type: none;
+    padding: 0;
+    border: 1px solid grey;
+  }
+  
+  .liClients {
+    padding: 5px;
+    border-bottom: 1px solid grey;
+  }
+  
+  .liClientsPointer {
+    padding: 5px;
+    border-bottom: 1px solid grey;
+    cursor: pointer;
+  }
+  
+  .selectVehicles {
+    display: inline;
+    width: 300px;
+  }

@@ -1,0 +1,29 @@
+.navContainer {
+  position: relative;
+  height: 100vh;
+  background-color: #10222e;
+}
+
+.header {
+  background-color: #7b9ea8;
+  border-bottom: solid #10222e 1px;
+  text-align: right;
+  height: 2.5rem;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.header-span {
+  margin-left: 2rem;
+  padding-right: 0.75rem;
+}
+
+.deleteButton {
+  background-color: #7b9ea8;
+  color: white;
+  border-radius: 10px;
+  position: absolute;
+  top: 0.25rem;
+  margin-right: 15px;
+  right: 0;
+}

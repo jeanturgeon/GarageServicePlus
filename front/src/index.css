@@ -1,0 +1,128 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Nunito', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;  
+  color: #10222E;
+}
+
+.logoNav img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.navItem {
+  display: block;
+  padding-top: 10vh;
+  color: #faf2ce;
+  text-align: center;
+  height: 30vh;
+}
+
+
+.navItem a {
+  color: #faf2ce;
+  text-decoration: none;
+}
+
+.navItemImg {
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-weight: 600;
+}
+
+th {
+  font-weight: 600;
+}
+
+td i {
+  color: #10222E
+}
+
+td a {
+  text-decoration: none;
+  cursor: pointer;
+  color: #10222E
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.addButton {
+  position: relative;
+  text-align: left;
+  margin-right: 5rem;
+  margin-top: 0.5rem;
+  color:#10222E
+}
+
+.addButton i {
+  color:#10222E
+}
+
+.button {
+  background-color: #10222E;
+  color: white;
+  border-radius: 10px;
+}
+
+.addButton {
+  text-align: right;
+  margin-right: 2rem;
+}
+
+.required-field, .errorMessage {
+  color: #EF8275;
+}
+
+/* Form Add Vehicule */
+.formAddVehicule{
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+
+.addButtonVehicule,
+.addButtonVehicule:hover {
+  position: relative;
+  text-align: left;
+  margin-right: 5rem;
+  margin-top: 0.5rem;
+  color:white;
+  background-color: #10222E;
+}
+
+.inputAddVehicule{
+  border:  1px solid lightgray;
+  width: 315px;
+  height: 40px;
+}
+
+
+.selectAddVehicule{
+  width: 309px;
+  height: 40px;
+  color: black;
+}
+
+.containerAddVehicule{
+  padding-left: 1px;
+  padding-right: 1px;
+  padding-bottom: 20px;
+  
+}
+
+.rowAddVehicule{
+  padding-left: 20px;
+}
+
+.h1AddVehicule{
+  padding-left: 10px;
+}
+
