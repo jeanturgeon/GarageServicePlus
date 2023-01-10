@@ -1,4 +1,4 @@
-# GarageServicePlus (INCOMPLETE)
+## GarageServicePlus (INCOMPLETE)
 
 Current state: end of second sprint. Final sprint yet to come.
 
