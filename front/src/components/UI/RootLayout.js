@@ -1,4 +1,4 @@
-import VerticalNav from './VerticalNav'
+import Navigation from './Navigation'
 import {Container, Row, Col} from 'react-bootstrap'
 import Header from './Header'
 import styles from './uistyles.module.css'
@@ -11,7 +11,7 @@ export default function RootLayout ({children}) {
                 <Row >
                     <Col xs={2}>  
                         <div className={styles.navContainer}>
-                            <VerticalNav />                        
+                            <Navigation />                        
                         </div>                      
                     </Col>
                     <Col xs={10}>

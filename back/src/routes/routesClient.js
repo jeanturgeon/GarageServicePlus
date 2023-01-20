@@ -6,7 +6,8 @@ const routes = (app) => {
   app.get("/api/client/getAllClient", (req, resp) => {
     con.query("SELECT * FROM client WHERE estActif = 1", (err, result) => {
       if (err) {
-        resp.send("error in api");
+        console.log("Error" + err);
+        resp.send({ error: "error in api : getAllClient" });
       } else {
         resp.send(result);
       }
@@ -24,8 +25,8 @@ const routes = (app) => {
     // connexion à la table et mettre à jour des informations
     con.query(sql, (err, result) => {
       if (err) {
-        resp.send("error in api");
-        console.log("error :" + err);
+        console.log("Error" + err);
+        resp.send({ error: "error in api : deactivatClient" });
       } else {
         resp.send(result);        
       }
@@ -42,9 +43,8 @@ const routes = (app) => {
       `SELECT * FROM client WHERE idClient = ${idClient}`,
       (err, result) => {
         if (err) {
-          console.log(err);
-          resp.send("error in api");
-          console.log("error :" + err);
+          console.log("Error" + err);
+          resp.send({ error: "error in api : getClientById" });
         } else {
           resp.send(result);
           console.log("Client : Details of a customer with his ID");
@@ -73,8 +73,8 @@ const routes = (app) => {
     // connexion à la table et ajoute des informations
     con.query(sql, (err, result) => {
       if (err) {
-        resp.send("error in api");
-        console.log("error :" + err);
+        console.log("Error" + err);
+        resp.send({ error: "error in api : addClient" });
       } else {
         resp.send(result);
         console.log("Client : Customer added successfully");
@@ -104,7 +104,7 @@ const routes = (app) => {
     // connexion à la table et mettre à jour des informations
     con.query(sql, (err, result) => {
       if (err) {
-        resp.send("error in api");
+        resp.send({ error: "error in api : modifyClient" });
         console.log("error :" + err);
       } else {
         resp.send(result);
@@ -125,9 +125,8 @@ const routes = (app) => {
       ORDER BY date ASC`,
       (err, result) => {
         if (err) {
-          console.log(err);
-          resp.send("error in api");
-          console.log("error :" + err);
+          console.log("Error" + err);
+          resp.send({ error: "error in api : getRDVByIdClient" });
         } else {
           resp.send(result);
           console.log("Client : List of past appointments of a client");
@@ -148,9 +147,8 @@ const routes = (app) => {
       WHERE  (rendezVous.idRendezVous = HRDV.idRendezVous) AND (rendezVous.idRendezVous = TSRDV.idRendezVous) AND (rendezVous.idClient = ${idClient} )`,
       (err, result) => {
         if (err) {
-          console.log(err);
-          resp.send("error in api");
-          console.log("error :" + err);
+          console.log("Error" + err);
+          resp.send({ error: "error in api : deleteRDVByIdClient" });
         } else {
           resp.send(result);
           console.log("Client : Delete all Appointments");

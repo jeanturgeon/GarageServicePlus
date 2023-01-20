@@ -1,9 +1,13 @@
-import { getAptById } from '../../util/routes'
-import { Link, useLoaderData, useNavigate } from 'react-router-dom'
+import { useContext } from 'react';
+import { useLoaderData, useNavigate, NavLink } from 'react-router-dom'
 import {Button, Card, ListGroup} from 'react-bootstrap';
+
+import { getAptById } from '../../util/routes'
 import DeleteAptButton from '../../components/Appointment/DeleteAptButton'
+import { AuthContext } from '../../util/auth.context';
 
 export default function AppointmentDetails() {
+  const {isAdmin} = useContext(AuthContext)
   const aptDetails = useLoaderData();
   const navigate = useNavigate();
 
@@ -17,16 +21,16 @@ export default function AppointmentDetails() {
     <Card>
       <Card.Header as="h3" style={{ background: '#10222E', color: 'white' }}>
         Détail du rendez-vous
-        <DeleteAptButton aptDetails={aptDetails} />
+        { isAdmin ? <DeleteAptButton aptDetails={aptDetails} /> :'' }        
       </Card.Header>
       {aptDetails.map((aptD) => (
         <Card.Body style={{ background: '#7B9EA8', color: 'white' }}>
-          <Card.Title as="h4">{aptD.prenom} {aptD.nom}</Card.Title>
+          <Card.Title as="h4"><NavLink to={`/nav/client/${aptD.idClient}`}>{aptD.prenom} {aptD.nom}</NavLink></Card.Title>
             <ListGroup variant="flush">
               <div className="fw-bold">Numéro de téléphone:</div>
               <ListGroup.Item>{aptD.telephone}</ListGroup.Item>
               <div className="fw-bold">Véhicule:</div>
-              <ListGroup.Item>{aptD.nomMarque} {aptD.modele} {aptD.annee}</ListGroup.Item>
+              <ListGroup.Item><NavLink to={`/nav/vehiculeClient/${aptD.idVehiculeClient}`}>{aptD.nomMarque} {aptD.modele} {aptD.annee}</NavLink></ListGroup.Item>
               <div className="fw-bold">Immatriculation:</div>
               <ListGroup.Item>{aptD.numeroPlaque}</ListGroup.Item>
               <div className="fw-bold">Kilométrage:</div>
@@ -40,7 +44,7 @@ export default function AppointmentDetails() {
               <div className="fw-bold">Durée:</div>
               <ListGroup.Item>{aptD.dureeTotal} Minutes</ListGroup.Item>
               <div className="fw-bold">Mécanicien-ne:</div>
-              <ListGroup.Item>{aptD.prenomEmploye} {aptD.nomEmploye}</ListGroup.Item>
+              <ListGroup.Item><NavLink to={`/nav/employe/${aptD.idEmploye}`}>{aptD.prenomEmploye} {aptD.nomEmploye}</NavLink></ListGroup.Item>
               <div className="fw-bold">Description:</div>
               <ListGroup.Item>{aptD.description}</ListGroup.Item>
             </ListGroup>
@@ -48,9 +52,7 @@ export default function AppointmentDetails() {
       ))
       }
       <Card.Footer style={{ background: '#10222E' }}>
-        <Link to="/">
           <Button onClick={handlePreviousPage} variant="outline-light">Retour à la page précédente</Button>
-        </Link>
       </Card.Footer>
     </Card>
     </div>

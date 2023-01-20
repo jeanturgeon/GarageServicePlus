@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
 import { Card } from "react-bootstrap"
 import {NavLink} from 'react-router-dom'
+
 import {getVehiculeByClient} from '../../util/routes'
 import styles from '../../pages/Client/client.module.css'
+import { IconAddWhite, IconEdit } from "../UI/icons.styles"
 
 export default function ClientVehiculeList(props) {
     const [vehicules, setVehicules] = useState([]);
@@ -21,8 +23,8 @@ export default function ClientVehiculeList(props) {
                 <Card.Header as='h5' className={styles["card-header"]}>
                     <div className='d-flex justify-content-between'>
                         Véhicule(s)
-                        <NavLink to={`/add-vehiculeClient/${props.idClient} `} className={styles.link} >
-                            <i className="fa-solid fa-circle-plus fa-lg "></i>
+                        <NavLink to={`/nav/add-vehiculeClient/${props.idClient} `} className={styles.link} >
+                            <IconAddWhite />
                         </NavLink>
                     </div>
                 </Card.Header>
@@ -31,11 +33,10 @@ export default function ClientVehiculeList(props) {
                             vehicules.map((vehicule, index) => {
                                 return (
                                     <div key={index} className={styles['vehicule-list-item']}>
-                                        <NavLink to={`/update-vehicule/${vehicule.idVehiculeClient}`}>
-                                            <i className="fa-solid fa-pen-to-square me-2"></i>
+                                        <NavLink to={`/nav/update-vehicule/${vehicule.idVehiculeClient}`}>
+                                            <IconEdit className="me-3 pb-1"/>
                                         </NavLink>
-
-                                        <NavLink to={`/vehiculeClient/${vehicule.idVehiculeClient}`}>
+                                        <NavLink to={`/nav/vehiculeClient/${vehicule.idVehiculeClient}`}>
                                             <p className={styles['vehicule-item']}>{vehicule.nomMarque} {vehicule.modele} {vehicule.annee}</p>
                                         </NavLink>
                                     </div>

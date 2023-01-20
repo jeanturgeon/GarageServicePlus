@@ -34,3 +34,16 @@ export function calculateEndTime(startTimeInTypeTime, durationInMinutes) {
     let endTimeInTypeTime = convertToTypeTime(endTimeInMinutes);
     return endTimeInTypeTime;
 }
+
+// Obtenir le deuxième prochain lundi si workdayDigit  = 0, deuxième prochain mardi si workdayDigit = 1, etc. (inspiré de : https://bobbyhadz.com/blog/javascript-get-date-of-next-monday)
+export function getSecondNextMonday(workdayDigit, date = new Date()) {
+    const dateCopy = new Date(date.getTime());
+  
+    const nextMonday = new Date(
+      dateCopy.setDate(
+        dateCopy.getDate() + (((7 - dateCopy.getDay() + 1) % 7) + 7 + workdayDigit || 14 + workdayDigit),
+      ),
+    );
+  
+    return nextMonday;
+  }

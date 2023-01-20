@@ -15,28 +15,30 @@ export default function ClientDetails() {
     deactivateClient(clientDetail[0].idClient)
       .then((response) => {
         if (response === 1) {
-          navigate("/clients");
+          navigate("/nav/clients");
         } else {
           alert("Une erreur est survenue!");
         }
       })
-    
   }
+
+  const handlePreviousPage = () => {
+    navigate(-1);
+  };
+
 
   return (
     <Container className={styles.container}>
       {/* Title section*/}
       <Row className={styles['section-header']}>
         <Col md={3}>
-          <NavLink to='/clients'>
-            <button className={styles['btn-client-detail']}>Retour à la liste de clients</button>
-          </NavLink>          
+            <button onClick={handlePreviousPage} className={styles['btn-client-detail']}>Retour à la page précédente</button>
         </Col>
         <Col md={6}>
           <h1 className={styles.clientName}>{clientDetail[0].prenom} {clientDetail[0].nom}</h1>
         </Col>
         <Col md={3} className='d-flex justify-content-end'>
-          <NavLink to='/add-appointment'>
+          <NavLink to='/nav/add-appointment'>
             <button className={styles['btn-client-detail']}>Créer un rendez-vous</button>
           </NavLink>          
         </Col>

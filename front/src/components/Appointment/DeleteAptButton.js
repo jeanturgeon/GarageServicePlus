@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+
 import uiStyles from '../UI/uistyles.module.css'
+import { IconDelete } from "../UI/icons.styles";
 
 export default function DeleteAptButton(props) {
 
@@ -14,7 +16,7 @@ export default function DeleteAptButton(props) {
             .then(response => {
                 if (response.data.affectedRows > 0) {
                     alert("Rendez-vous supprimé avec succès!");
-                    navigate("/");
+                    navigate("/nav/home");
                 }
                 else {
                     alert("Un problème est survenu lors de la suppression du rendez-vous.");
@@ -29,7 +31,7 @@ export default function DeleteAptButton(props) {
             type="button"
             value="Supprimer le rendez-vous"
             onClick={handleDeleteAptButtonClick}>
-            <i class="fa-regular fa-trash-can"></i>
+            <IconDelete />
         </button>
     )
 }

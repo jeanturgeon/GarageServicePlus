@@ -11,18 +11,23 @@ const routes = (app) => {
     rendezVous.dureeTotal, rendezVous.idClient, rendezVous.idVehiculeClient, 
     client.prenom, client.nom, client.idClient, 
     vehiculeClient.numeroPlaque, vehiculeClient.idModeleVoiture, 
-    modeleVoiture.modele, modeleVoiture.annee, modeleVoiture.idMarqueVoiture,marqueVoiture.nomMarque    
+    modeleVoiture.modele, modeleVoiture.annee, modeleVoiture.idMarqueVoiture,marqueVoiture.nomMarque, 
+    employe.nomEmploye, employe.prenomEmploye, employe.idEmploye 
+
     FROM rendezVous
     LEFT JOIN client ON rendezVous.idClient = client.idClient 
     LEFT JOIN vehiculeClient ON rendezVous.idVehiculeClient = vehiculeClient.idVehiculeClient
     LEFT JOIN modeleVoiture ON vehiculeClient.idModeleVoiture = modeleVoiture.idModeleVoiture
-    LEFT JOIN marqueVoiture ON modeleVoiture.idMarqueVoiture  = marqueVoiture.idMarqueVoiture    
+    LEFT JOIN marqueVoiture ON modeleVoiture.idMarqueVoiture  = marqueVoiture.idMarqueVoiture   
+    LEFT JOIN HoraireRendezVous ON rendezVous.idRendezVous = HoraireRendezVous.idRendezVous
+    LEFT JOIN plageDisponibilite ON HoraireRendezVous.idPlageDisponibilite = plageDisponibilite.idPlageDisponibilite
+    LEFT JOIN employe ON plageDisponibilite.idEmploye = employe.idEmploye 
       ORDER BY rendezVous.date  ASC, rendezVous.heure ASC;   
     `,
       (err, result) => {
         if (err) {
-          resp.send("error in api");
-          console.log("error :" + err);
+          console.log("Error" + err);
+          resp.send({ error: "error in api : getAllRendezVous" });
         } else {
           resp.send(result);
           console.log("Rendez-Vous : List displayed successfully");
@@ -47,9 +52,13 @@ const routes = (app) => {
 
     // connexion à la table et ajoute des informations
     con.query(sql, (err, result) => {
-      if (err) throw err;
-      else resp.send(result);
-      console.log("Rendez-Vous : Added with success");
+      if (err) {
+        console.log("Error" + err);
+        resp.send({ error: "error in api : addRendezVous" });
+      } else {
+        resp.send(result);
+        console.log("Rendez-Vous : Added with success");
+      }
     });
   });
 
@@ -66,8 +75,8 @@ const routes = (app) => {
     // connexion à la table et mettre à jour des informations
     con.query(sql, (err, result) => {
       if (err) {
-        resp.send("error in api");
-        console.log("error : " + err);
+        console.log("Error" + err);
+        resp.send({ error: "error in api : updateKMClient" });
       } else {
         resp.send(result);
         console.log("Rendez-Vous : KM Updated successfully");
@@ -91,8 +100,8 @@ const routes = (app) => {
     // connexion à la table et supprimer des informations
     con.query(sql, (err, result) => {
       if (err) {
-        resp.send("error in api");
-        console.log("error : " + err);
+        console.log("Error" + err);
+        resp.send({ error: "error in api : deleteRendezVous" });
       } else {
         resp.send(result);
         console.log("Rendez-Vous : Deleted successfully");
@@ -128,8 +137,8 @@ const routes = (app) => {
         WHERE rendezVous.idRendezVous = "${idRendezVous}";`,
       (err, result) => {
         if (err) {
-          resp.send("error in api");
-          console.log("error :" + err);
+          console.log("Error" + err);
+          resp.send({ error: "error in api : detailsRendezVous" });
         } else {
           resp.send(result);
           // console.log("Rendez-Vous : Details display successfully");
@@ -147,8 +156,8 @@ const routes = (app) => {
     // con.query(`SELECT prenom,nom,telephone FROM client WHERE telephone = "${telephone}"`, (err, result) => {
     con.query(`SELECT prenom,nom,telephone FROM client`, (err, result) => {
       if (err) {
-        resp.send("error in api");
-        console.log("error :" + err);
+        console.log("Error" + err);
+        resp.send({ error: "error in api : nameClientRDV" });
       } else {
         resp.send(result);
         console.log(
@@ -178,8 +187,8 @@ const routes = (app) => {
     // connexion à la table et mettre à jour des informations
     con.query(sql, (err, result) => {
       if (err) {
-        resp.send("error in api");
-        console.log("error : " + err);
+        console.log("Error" + err);
+        resp.send({ error: "error in api : updateRendezVous" });
       } else {
         resp.send(result);
         console.log("Rendez-Vous : Updated successfully");
@@ -192,8 +201,8 @@ const routes = (app) => {
     // connexion à la table et Afficher les informations de idRendezVous demandé
     con.query(`SELECT * FROM typeService `, (err, result) => {
       if (err) {
-        resp.send("error in api");
-        console.log("error :" + err);
+        console.log("Error" + err);
+        resp.send({ error: "error in api : getAllTypeService" });
       } else {
         resp.send(result);
         console.log("Rendez-Vous : Details display successfully");
@@ -219,8 +228,8 @@ const routes = (app) => {
     WHERE vehiculeClient.idClient = ${idClient} AND vehiculeClient.estActifVC = 1`,
       (err, result) => {
         if (err) {
-          resp.send("error in api");
-          console.log("error :" + err);
+          console.log("Error" + err);
+          resp.send({ error: "error in api : getVehiculeByClient" });
         } else {
           resp.send(result);
           console.log("Rendez-Vous : Details display successfully");
@@ -236,15 +245,15 @@ const routes = (app) => {
 
     // connexion à la table et Afficher les informations de idRendezVous demandé
     con.query(
-      `SELECT rendezVous.* FROM rendezVous 
+      `SELECT rendezVous.*, HoraireRendezVous.heureFin FROM rendezVous 
       LEFT JOIN HoraireRendezVous ON rendezVous.idRendezVous = HoraireRendezVous.idRendezVous
       LEFT JOIN plageDisponibilite ON HoraireRendezVous.idPlageDisponibilite = plageDisponibilite.idPlageDisponibilite
-      LEFT JOIN employe ON plageDisponibilite.idEmploye = employe.idEmploye WHERE employe.idEmploye = ${idEmploye}`,
+      LEFT JOIN employe ON plageDisponibilite.idEmploye = employe.idEmploye WHERE employe.idEmploye = ${idEmploye} 
+      ORDER BY rendezVous.date ASC`,
       (err, result) => {
         if (err) {
-          console.log(err);
-          resp.send("error in api");
-          console.log("error :" + err);
+          console.log("Error" + err);
+          resp.send({ error: "error in api : getRDVByEmploye" });
         } else {
           resp.send(result);
           console.log("Rendez-Vous : Details RendezVous display successfully");
@@ -267,8 +276,8 @@ const routes = (app) => {
     // connexion à la table et ajoute des informations
     con.query(sql, (err, result) => {
       if (err) {
-        resp.send("error in api");
-        console.log("error : " + err);
+        console.log("Error" + err);
+        resp.send({ error: "error in api : addHoraireRendezVous" });
       } else {
         resp.send(result);
         console.log("Horaire Rendez-Vous : Added with success");
@@ -291,8 +300,8 @@ const routes = (app) => {
     WHERE plageDisponibilite.idEmploye = "${idEmploye}"`,
       (err, result) => {
         if (err) {
-          resp.send("error in api");
-          console.log("error :" + err);
+          console.log("Error" + err);
+          resp.send({ error: "error in api : getDispoByEmploye" });
         } else {
           resp.send(result);
           console.log("Rendez-Vous : Details display successfully");
@@ -313,9 +322,13 @@ const routes = (app) => {
 
     // connexion à la table et ajoute des informations
     con.query(sql, (err, result) => {
-      if (err) throw err;
-      else resp.send(result);
-      console.log("TypeService : Added with success");
+      if (err) {
+        console.log("Error" + err);
+        resp.send({ error: "error in api : addTypeServiceByIdRendezVous" });
+      } else {
+        resp.send(result);
+        console.log("TypeService : Added with success");
+      }
     });
   });
 
@@ -341,8 +354,8 @@ const routes = (app) => {
     `,
       (err, result) => {
         if (err) {
-          resp.send("error in api");
-          console.log("error :" + err);
+          console.log("Error" + err);
+          resp.send({ error: "error in api : getRDVByDate" });
         } else {
           resp.send(result);
           console.log("Rendez-Vous : Details display successfully");
@@ -370,8 +383,8 @@ const routes = (app) => {
     `,
       (err, result) => {
         if (err) {
-          resp.send("error in api");
-          console.log("error :" + err);
+          console.log("Error" + err);
+          resp.send({ error: "error in api : getDispoByShiftDate" });
         } else {
           resp.send(result);
           console.log("Rendez-Vous : Details display successfully");
@@ -395,8 +408,10 @@ const routes = (app) => {
     `,
         (err, result) => {
           if (err) {
-            resp.send("error in api");
-            console.log("error :" + err);
+            console.log("Error" + err);
+            resp.send({
+              error: "error in api : getTypesServiceByIdRendezVous",
+            });
           } else {
             resp.send(result);
             console.log(
@@ -424,8 +439,8 @@ const routes = (app) => {
       // connexion à la table et mettre à jour des informations
       con.query(sql, (err, result) => {
         if (err) {
-          resp.send("error in api");
-          console.log("error : " + err);
+          console.log("Error" + err);
+          resp.send({ error: "error in api : updateHoraireRendezVous" });
         } else {
           resp.send(result);
           console.log("Horaire Rendez-Vous : Updated successfully");
@@ -435,30 +450,25 @@ const routes = (app) => {
   );
 
   // #### Supprimer une entrée dans la table TypeService_RendezVous ####
-  app.delete(
-    "/api/rendezVous/deleteTypeServiceRendezVous",
-    (req, resp) => {
-      // Récupérer les données du body de la requête
-      let idRendezVous = req.body.idRendezVous;
-      let idTypeService = req.body.idTypeService;
+  app.delete("/api/rendezVous/deleteTypeServiceRendezVous", (req, resp) => {
+    // Récupérer les données du body de la requête
+    let idRendezVous = req.body.idRendezVous;
+    let idTypeService = req.body.idTypeService;
 
-      // Requête pour supprimer l'entrée correspondante dans TypeService_RendezVous
-      let sql = `DELETE TypeService_RendezVous FROM TypeService_RendezVous WHERE TypeService_RendezVous.idRendezVous = "${idRendezVous}" AND TypeService_RendezVous.idTypeService = "${idTypeService}";`;
+    // Requête pour supprimer l'entrée correspondante dans TypeService_RendezVous
+    let sql = `DELETE TypeService_RendezVous FROM TypeService_RendezVous WHERE TypeService_RendezVous.idRendezVous = "${idRendezVous}" AND TypeService_RendezVous.idTypeService = "${idTypeService}";`;
 
-      // Connexion à la table et lancement de la requête
-      con.query(sql, (err, result) => {
-        if (err) {
-          resp.send("error in api");
-          console.log("error : " + err);
-        }
-        else {
-          console.log("TypeService_RendezVous deleted successfully");
-          resp.send(result);
-        }
-      });
-    }
-  );
-
+    // Connexion à la table et lancement de la requête
+    con.query(sql, (err, result) => {
+      if (err) {
+        console.log("Error" + err);
+        resp.send({ error: "error in api : deleteTypeServiceRendezVous" });
+      } else {
+        console.log("TypeService_RendezVous deleted successfully");
+        resp.send(result);
+      }
+    });
+  });
 };
 
 export default routes;

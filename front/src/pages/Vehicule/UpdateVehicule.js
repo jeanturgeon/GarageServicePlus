@@ -1,7 +1,7 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import { getDetailsVehicule, UpdateVehiculeClient } from "../../util/routes";
-import { Col, Container, Row } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 
 export default function UpdateVehicule() {
   const vehiculeUpdate = useLoaderData();

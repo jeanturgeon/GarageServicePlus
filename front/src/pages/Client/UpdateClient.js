@@ -49,7 +49,7 @@ export default function UpdateClient() {
 
     updateClient(dataObj, clientData.id).then((response) => {
       if (response === 1) {
-        navigate("/clients");
+        navigate("/nav/clients");
       } else {
         alert("Une erreur est survenue!");
       }
@@ -210,7 +210,7 @@ export default function UpdateClient() {
         <button className="button" type="submit">
           Enregistrer
         </button>
-        <NavLink to="/clients">
+        <NavLink to="/nav/clients">
           <button className="button ms-5" type="reset">
             Annuler
           </button>

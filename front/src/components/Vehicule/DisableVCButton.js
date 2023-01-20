@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import uiStyles from '../UI/uistyles.module.css'
+import { IconDelete } from "../UI/icons.styles";
 
 export default function DisableVCButton(props) {
 
@@ -29,7 +30,7 @@ export default function DisableVCButton(props) {
             type="button"
             value="Désactiver un véhicule"
             onClick={handleDisableVCButtonClick}>
-            <i class="fa-regular fa-trash-can"></i>
+            <IconDelete />
         </button>
     )
 }

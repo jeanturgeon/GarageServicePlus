@@ -34,7 +34,7 @@ export default function AddClient() {
     addClient(dataObj)
       .then(response => {
         if (response === "OK") {
-          setTimeout(() => navigate('/clients'), 500)
+          setTimeout(() => navigate('/nav/clients'), 500)
         } else {
           alert("Une erreur est survenue!");
         }
@@ -119,7 +119,7 @@ export default function AddClient() {
         </div>
         {/* boutons */}
         <button className="button" type="submit">Enregistrer</button>
-        <NavLink to='/clients' >
+        <NavLink to='/nav/clients' >
           <button className="button ms-5" type="reset">Annuler</button>
         </NavLink>
       </form>       

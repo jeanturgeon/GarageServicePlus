@@ -4,6 +4,7 @@ import routesRdv from './src/routes/routesRdv.js';
 import routesClient from './src/routes/routesClient.js';
 import routesEmploye from './src/routes/routesEmploye.js';
 import routeVehicule from './src/routes/routesVehicule.js';
+import routeHoraire from './src/routes/routesHoraire.js';
 import cors  from 'cors';
 import dotenv from 'dotenv';
 
@@ -22,7 +23,9 @@ routesRdv(app);
 routesClient(app);
 routesEmploye(app);
 routeVehicule(app);
+routeHoraire(app);
 
 app.listen(process.env.PORT)
 
 export default app
+

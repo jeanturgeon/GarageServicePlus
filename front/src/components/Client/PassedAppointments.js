@@ -32,7 +32,7 @@ export default function PassedAppointments(props) {
                         PastApts.map((PastApt, index) => {
                             return (
                                 <div key={index}>
-                                    <NavLink style={{ color: 'black' }} to={`/appointment/${PastApt.idRendezVous}`}>
+                                    <NavLink style={{ color: 'black' }} to={`/nav/appointment/${PastApt.idRendezVous}`}>
                                         <p>{PastApt.date.substring(0, 10)} - {PastApt.heure.substring(0, 5)}</p>
                                     </NavLink>
                                 </div>

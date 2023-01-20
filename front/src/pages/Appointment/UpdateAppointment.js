@@ -14,6 +14,7 @@ import AppointmentsByDate from "../../components/Appointment/AppointmentsByDate"
 import { convertToMinutes, calculateEndTime } from "../../util/helper";
 import { Col, Container, Row } from "react-bootstrap";
 import Spinner from 'react-bootstrap/Spinner';
+import styles from "./appointment.module.css"
 
 export default function UpdateAppointment() {
   const clients = useLoaderData();
@@ -221,7 +222,7 @@ export default function UpdateAppointment() {
         .then(response => {
           if (updateAppointmentOK && updateScheduleAppointmentOK && deleteServiceTypesOK && addServiceTypesOK && updateKmsOK) {
             alert("Rendez-vous modifié avec succès!");
-            navigate("/");
+            navigate("/nav/home");
           }
           else {
             // console.log(updateAppointmentOK);
@@ -244,7 +245,7 @@ export default function UpdateAppointment() {
       "Veuillez cliquer sur OK pour confirmer l'annulation. Toutes les données saisies seront perdues."
     );
     if (answer) {
-      navigate("/");
+      navigate("/nav/home");
     }
   }
 
@@ -426,6 +427,7 @@ export default function UpdateAppointment() {
         </Col>
         <Col md={7}>
           {/* Scheduler */}
+          <h6 className={styles['shifts-title']} >Employés à l'horaire le {selectedDate}</h6>
           <AppointmentsByDate selectedDate={selectedDate} />
         </Col>
       </Row>

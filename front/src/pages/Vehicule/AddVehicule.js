@@ -1,7 +1,8 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Col, Container, Row } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
+
 import TypeVehiculeDropdown from "../../components/Vehicule/TypeVehiculeDropdown";
 import ModelCarDropdown from "../../components/Vehicule/ModelCarDropdown";
 
@@ -67,6 +68,9 @@ export default function AddVehiculeClient() {
       navigate(-1);  // se rendre à la page du client après le submit
 
   }
+  const handlePreviousPage = () => {
+    navigate(-1);
+  };
 
   return (
     <Container className="containerAddVehicule" style={{ background: "#7B9EA8", color: "white" }}>
@@ -134,6 +138,13 @@ export default function AddVehiculeClient() {
             <button type="submit" className="button addButtonVehicule">
               Enregistrer
             </button>
+        <button
+          className="button ms-5"
+          type="reset"
+          onClick={handlePreviousPage}
+        >
+          Annuler
+        </button>
           </form>
       </Row>
     </Container>

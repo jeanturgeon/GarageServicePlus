@@ -187,3 +187,127 @@ export async function UpdateVehiculeClient(body, idVehiculeClient) {
 
 
 // EMPLOYES ***********************************
+
+export async function getEmployeById(idEmploye) {
+    const url = 'http://localhost:4000/api/employe/getEmployeById/' + idEmploye;
+    const response = await fetch(url)
+    if (!response.ok) {
+        throw { message: 'Failed to get Employee details', status: 500 };
+    }
+    return response.json();
+}
+
+//get all employe
+export async function getAllEmploye() {
+    const url = 'http://localhost:4000/api/employe/getAllEmploye/';
+    const response = await fetch(url)
+    if (!response.ok) {
+        throw { message: 'Failed to get Employes', status: 500 };
+    }
+    return response.json();
+}
+
+// desactivation employe
+export async function deactivateEmploye(idEmploye) {
+    const url = "http://localhost:4000/api/employe/deactivateEmployeById/" + idEmploye;
+    const response = await axios.put(url)
+        .then(response => {        
+            return response.data.affectedRows
+        })
+        .catch(error => console.log(error));
+    return response;
+}
+
+//ajout employe
+export async function addEmploye(body) {
+    const url = "http://localhost:4000/api/employe/addEmploye/";
+    let response = await axios.post(url, body)
+        .then(response => {
+            return response.statusText
+        })
+        .catch(error => console.log(error));
+    return response;
+}
+
+//MODIFIER EMPLOYE
+    export async function updateEmploye(body, idEmploye) {
+        const url = "http://localhost:4000/api/employe/updateEmploye/" + idEmploye;
+        const response = await axios.put(url, body)
+            .then(response => {        
+                return response.data.affectedRows
+            })
+            .catch(error => console.log(error));
+        return response;
+    }
+
+// AJOUTER FIREBASEID
+    export async function addFirebaseId(body, courriel) {
+        const url="http://localhost:4000/api/employe/addFirebaseId/" + courriel;
+        const response = await axios.put(url, body)
+            .then(response => {
+                return response.data.affectedRows
+            })
+            .catch (error => console.log(error));
+        return response;
+    }
+
+
+// OBTENIR ADMIN STATUS
+export async function getEmployeebyFirebaseId(firebaseId) {
+    const url="http://localhost:4000/api/employe/getEmployeebyFirebaseId/" + firebaseId;
+    const response = await axios.get(url)
+        .then(response => {
+            return response.data
+        })
+        .catch (error => console.log(error));
+    return response;
+}
+
+// HORAIRE *************************************
+
+export async function addShift(body) {
+    const url = "http://localhost:4000/api/horaire/addHoraireWeek";
+    let response = await axios.post(url, body)
+        .then(response => {
+            return response.data
+        })
+        .catch(error => console.log(error));
+    return response;
+}
+
+export async function getShiftsByIdEmployee(idEmploye) {
+    const url = 'http://localhost:4000/api/horaire/getHoraireByIdEmploye/' + idEmploye;
+    const response = await fetch(url)
+    if (!response.ok) {
+        throw { message: 'Failed to get employee shifts', status: 500 };
+    }
+    return response.json();
+}
+
+export async function getAptsByIdEmployee(idEmploye) {
+    const url = 'http://localhost:4000/api/rendezVous/getRDVByEmploye/' + idEmploye;
+    const response = await fetch(url)
+    if (!response.ok) {
+        throw { message: 'Failed to get employee shifts', status: 500 };
+    }
+    return response.json();
+}
+
+export async function getShiftByShiftId(idPlageDisponibilite) {
+    const url = 'http://localhost:4000/api/horaire/getHoraireByIdPH/' + idPlageDisponibilite;
+    const response = await fetch(url)
+    if (!response.ok) {
+        throw { message: 'Failed to get shift', status: 500 };
+    }
+    return response.json();
+}
+
+export async function updateShift(body, idPlageDisponibilite) {
+    const url = 'http://localhost:4000/api/horaire/updateHoraire/' + idPlageDisponibilite ;
+    const response = await axios.put(url, body)
+        .then(response => {        
+            return response.data;
+        })
+        .catch(error => console.log(error));
+    return response;
+}

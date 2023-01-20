@@ -162,7 +162,7 @@ export default function AddAppointment() {
         .then(response => {
           if (addAptOK && addScheduleAppointmentOK && addAllServiceTypesOK && updateKmOK) {
             alert("Rendez-vous créé avec succès!");
-            navigate("/");
+            navigate("/nav/home");
           }
           else {
             // console.log(addAptOK);
@@ -184,7 +184,7 @@ export default function AddAppointment() {
       "Veuillez cliquer sur OK pour confirmer l'annulation. Toutes les données saisies seront perdues."
     );
     if (answer) {
-      navigate("/");
+      navigate("/nav/home");
     }
   }
 

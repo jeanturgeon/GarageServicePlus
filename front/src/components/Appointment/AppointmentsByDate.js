@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import { getShiftsByDate, getAptByDate } from "../../util/routes";
-import styles from '../../pages/Appointment/appointment.module.css'
+import styles from '../../pages/Appointment/appointment.module.css';
+import { NavLink } from "react-router-dom";
 
 export default function AppointmentsByDate(props) {
     const [shifts, setShifts] = useState([]);
@@ -27,13 +28,12 @@ export default function AppointmentsByDate(props) {
 
     return (
         <>
-            {shifts.length > 0 && <h5 className="mt-4">Employés à l'horaire aujourd'hui: </h5>}
             {
-                shifts.length > 0 ?
-                    shifts.map((shift, index) =>
+                shifts.filter(plage => parseInt(plage.conge) === 0).length > 0 ?
+                    shifts.filter(plage => parseInt(plage.conge) === 0).map((shift, index) =>
                         <Card key={index} className={styles["shift-card"]}>
                             <Card.Header className={styles["card-header"]}>
-                                {shift.prenomEmploye + " " + shift.nomEmploye}<br />
+                                <NavLink to={`/nav/employe/${shift.idEmploye}`}>{shift.prenomEmploye + " " + shift.nomEmploye}</NavLink><br />
                                 ({shift.hrsDebutJournee.slice(0, 5)} - {shift.hrsFinJournee.slice(0, 5)})
                             </Card.Header>
                             <Card.Subtitle className={styles["card-body"]}>Lunch: {shift.hrsDebutDiner.slice(0, 5) + " - " + shift.hrsFinDiner.slice(0, 5)}</Card.Subtitle>
@@ -42,7 +42,7 @@ export default function AppointmentsByDate(props) {
                             {appointments.filter(apt => apt.idEmploye === shift.idEmploye).length === 0 ?
                                 <i><br />Aucun rendez-vous</i> :
                                 appointments.filter(apt => apt.idEmploye === shift.idEmploye).map((apt, index) =>
-                                    <Card.Subtitle className={styles["card-body"]} key={index}>{apt.heure.slice(0, 5) + " - " + apt.heureFin.slice(0, 5)}</Card.Subtitle>)}
+                                    <Card.Subtitle className={styles["card-body"]} key={index}><NavLink to={`/nav/appointment/${apt.idRendezVous}`}>{apt.heure.slice(0, 5) + " - " + apt.heureFin.slice(0, 5)}</NavLink></Card.Subtitle>)}
                         </Card>) :
                     <h5>Aucun employé à l'horaire</h5>
             }

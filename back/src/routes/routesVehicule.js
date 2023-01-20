@@ -19,9 +19,8 @@ const routes = (app) => {
         WHERE idClient = ${idClient} AND estActifVC = 1`,
         (err, result) => {
           if (err) {
-            console.log(err);
-            resp.send("error in api");
-            console.log("error :" + err);
+            console.log("Error" + err);
+            resp.send({ error: "error in api : getVehiculeClientByIdClient" });
           } else {
             resp.send(result);
             console.log("Vehicule : List of past appointments of a client");
@@ -50,9 +49,8 @@ const routes = (app) => {
         WHERE idVehiculeClient = ${idVehiculeClient} AND estActifVC = 1`,
         (err, result) => {
           if (err) {
-            console.log(err);
-            resp.send("error in api");
-            console.log("error :" + err);
+            console.log("Error" + err);
+            resp.send({ error: "error in api : getVehiculeClientByIdVC" });
           } else {
             resp.send(result);
             console.log("Vehicule : Details of a customer's vehicle");
@@ -80,8 +78,8 @@ const routes = (app) => {
     // connexion à la table et ajoute des informations
     con.query(sql, (err, result) => {
       if (err) {
-        resp.send("error in api");
-        console.log("error :" + err);
+        console.log("Error" + err);
+        resp.send({ error: "error in api : addVehiculeClient" });
       } else {
         resp.send(result);
         console.log("Vehicule : Vehicle has been added to a customer");
@@ -101,8 +99,8 @@ const routes = (app) => {
       // connexion à la table et mettre à jour des informations
       con.query(sql, (err, result) => {
         if (err) {
-          resp.send("error in api");
-          console.log("error :" + err);
+          console.log("Error" + err);
+          resp.send({ error: "error in api : deactivateVehiculeClient" });
         } else {
           resp.send({...result, msg:
             "VehiculeClient # " +
@@ -119,7 +117,8 @@ const routes = (app) => {
   app.get("/api/vehicule/getTypeVehicule", (req, resp) => {
     con.query("SELECT * FROM typeVehicule", (err, result) => {
       if (err) {
-        resp.send("error in api");
+        console.log("Error" + err);
+        resp.send({ error: "error in api : getTypeVehicule" });
       } else {
         resp.send(result);
       }
@@ -136,8 +135,8 @@ const routes = (app) => {
         LEFT JOIN marqueVoiture ON modeleVoiture.idMarqueVoiture = modeleVoiture.idMarqueVoiture`,
       (err, result) => {
         if (err) {
-          resp.send("error in api");
           console.log("Error" + err);
+          resp.send({ error: "error in api : getModelCar" });
         } else {
           resp.send(result);
         }
@@ -162,8 +161,8 @@ const routes = (app) => {
     // connexion à la table et ajoute des informations
     con.query(sql, (err, result) => {
       if (err) {
-        resp.send("error in api");
-        console.log("error :" + err);
+        console.log("Error" + err);
+        resp.send({ error: "error in api : addVehiculeClient" });
       } else {
         resp.send(result);
         console.log("Vehicule : Vehicle has been added to a customer");
@@ -187,8 +186,8 @@ const routes = (app) => {
     // connexion à la table et ajoute des informations
     con.query(sql, (err, result) => {
       if (err) {
-        resp.send("error in api");
-        console.log("error :" + err);
+        console.log("Error" + err);
+        resp.send({ error: "error in api : updateVehiculeClient" });
       } else {
         resp.send(result);
         console.log("Vehicule : Vehicle has been updated");

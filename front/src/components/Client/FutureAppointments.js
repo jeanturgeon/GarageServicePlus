@@ -31,7 +31,7 @@ export default function FutureAppointments(props) {
                         FutureApts.map((FutureApt, index) => {
                             return (
                                 <div key={index}>
-                                    <NavLink style={{ color: 'black' }} to={`/appointment/${FutureApt.idRendezVous}`}>
+                                    <NavLink style={{ color: 'black' }} to={`/nav/appointment/${FutureApt.idRendezVous}`}>
                                         <p>{FutureApt.date.substring(0, 10)} - {FutureApt.heure.substring(0, 5)}</p>
                                     </NavLink>
                                 </div>

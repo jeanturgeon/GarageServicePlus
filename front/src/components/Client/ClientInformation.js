@@ -1,6 +1,8 @@
 import {Card} from 'react-bootstrap'
 import {NavLink} from 'react-router-dom'
+
 import styles from '../../pages/Client/client.module.css'
+import { IconEditWhite } from '../UI/icons.styles'
 
 export default function ClientInformation(props) {
     return (
@@ -9,8 +11,8 @@ export default function ClientInformation(props) {
           <Card.Header as='h5' className={styles["card-header"]}>
             <div className='d-flex justify-content-between'>
               Coordonnées
-              <NavLink to={`/update-client/${props.clientDetail[0].idClient}`} className={styles.link} >
-                <i className="fa-solid fa-pen-to-square fa-lg"></i>
+              <NavLink to={`/nav/update-client/${props.clientDetail[0].idClient}`} className={styles.link} >
+                <IconEditWhite />
               </NavLink>
             </div>
           </Card.Header>
